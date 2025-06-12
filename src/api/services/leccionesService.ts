@@ -4,7 +4,8 @@ export interface ConsultaDto {
 
 //Método POST
 export const buscarLeccionesConCoincidencia = async (datos: ConsultaDto) => {
-  const url = `https://lecciones-aprendidas-func.azurewebsites.net/api/BuscarLecciones`;
+  const baseUrl = import.meta.env.VITE_API_URL;
+  const url = `${baseUrl}/BuscarLecciones`;
 
   const response = await fetch(url, {
     method: "POST",
