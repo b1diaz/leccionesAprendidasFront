@@ -19,6 +19,12 @@ jobs:
         with:
           submodules: true
           lfs: false
+      
+      - name: Set up environment variables
+        run: |
+          echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" >> .env.production
+          echo "VITE_API_KEY=${{ secrets.VITE_API_KEY }}" >> .env.production
+
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
