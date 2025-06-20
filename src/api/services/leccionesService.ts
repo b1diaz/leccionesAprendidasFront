@@ -4,8 +4,7 @@ export interface ConsultaDto {
 
 //Método POST
 export const buscarLeccionesConCoincidencia = async (datos: ConsultaDto) => {
-  const baseUrl = import.meta.env.VITE_API_URL;
-  const url = `${baseUrl}/BuscarLecciones`;
+  const url = `${import.meta.env.VITE_API_URL}/BuscarLecciones${import.meta.env.VITE_API_KEY}`;
 
   const response = await fetch(url, {
     method: "POST",

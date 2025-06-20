@@ -70,7 +70,7 @@ const Forms = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-purple-100 cloud-bg">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 cloud-bg">
       <LeftSidebar />
       
       {/* Contenido principal con margen para la barra lateral */}
@@ -79,12 +79,12 @@ const Forms = () => {
           <div className="max-w-6xl mx-auto">
             {/* Header con botón de crear */}
             <div className="flex justify-between items-center mb-6">
-              <h1 className="text-2xl lg:text-3xl font-bold text-purple-900">
+              <h1 className="text-2xl lg:text-3xl font-bold text-blue-900">
                 Gestión de Formularios
               </h1>
               <Button 
                 onClick={() => setIsModalOpen(true)}
-                className="bg-purple-600 hover:bg-purple-700 text-white"
+                className="bg-blue-600 hover:bg-blue-700 text-white"
               >
                 <Plus className="w-4 h-4 mr-2" />
                 Crear Formulario
@@ -93,25 +93,25 @@ const Forms = () => {
 
             {/* Lista de formularios recientes */}
             <div className="space-y-4">
-              <h2 className="text-xl font-semibold text-purple-800 mb-4">
+              <h2 className="text-xl font-semibold text-blue-800 mb-4">
                 Formularios Creados Recientemente
               </h2>
               
               {forms.map((form) => (
                 <Card 
                   key={form.id} 
-                  className="bg-white/80 backdrop-blur-sm border-purple-200 hover:shadow-lg transition-shadow"
+                  className="bg-white/80 backdrop-blur-sm border-blue-200 hover:shadow-lg transition-shadow"
                 >
                   <CardHeader className="pb-2">
-                    <CardTitle className="text-purple-800 text-lg">
+                    <CardTitle className="text-blue-800 text-lg">
                       {form.title}
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-purple-700 mb-3 text-sm">
+                    <p className="text-blue-700 mb-3 text-sm">
                       {form.description}
                     </p>
-                    <p className="text-xs text-purple-600">
+                    <p className="text-xs text-blue-600">
                       Creado: {form.createdAt}
                     </p>
                   </CardContent>
@@ -120,8 +120,8 @@ const Forms = () => {
 
               {forms.length === 0 && (
                 <div className="text-center py-12">
-                  <p className="text-purple-600 text-lg">No hay formularios creados</p>
-                  <p className="text-purple-500 text-sm mt-2">
+                  <p className="text-blue-600 text-lg">No hay formularios creados</p>
+                  <p className="text-blue-500 text-sm mt-2">
                     Crea tu primer formulario usando el botón de arriba
                   </p>
                 </div>
@@ -133,16 +133,16 @@ const Forms = () => {
 
       {/* Modal para crear formulario */}
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent className="bg-white border-purple-200 max-w-md">
+        <DialogContent className="bg-white border-blue-200 max-w-md">
           <DialogHeader>
-            <DialogTitle className="text-purple-900 text-xl">
+            <DialogTitle className="text-blue-900 text-xl">
               Crear Nuevo Formulario
             </DialogTitle>
           </DialogHeader>
           
           <div className="space-y-4 mt-4">
             <div>
-              <Label htmlFor="title" className="text-purple-800 font-medium">
+              <Label htmlFor="title" className="text-blue-800 font-medium">
                 Título
               </Label>
               <Input
@@ -150,12 +150,12 @@ const Forms = () => {
                 value={newForm.title}
                 onChange={(e) => setNewForm({ ...newForm, title: e.target.value })}
                 placeholder="Ingresa el título del formulario"
-                className="mt-1 border-purple-200 focus:border-purple-500"
+                className="mt-1 border-blue-200 focus:border-blue-500"
               />
             </div>
 
             <div>
-              <Label htmlFor="description" className="text-purple-800 font-medium">
+              <Label htmlFor="description" className="text-blue-800 font-medium">
                 Descripción
               </Label>
               <Textarea
@@ -163,7 +163,7 @@ const Forms = () => {
                 value={newForm.description}
                 onChange={(e) => setNewForm({ ...newForm, description: e.target.value })}
                 placeholder="Describe el propósito de este formulario"
-                className="mt-1 border-purple-200 focus:border-purple-500 min-h-[100px]"
+                className="mt-1 border-blue-200 focus:border-blue-500 min-h-[100px]"
               />
             </div>
           </div>
@@ -172,14 +172,14 @@ const Forms = () => {
             <Button 
               variant="outline" 
               onClick={handleCancel}
-              className="border-purple-300 text-purple-700 hover:bg-purple-50"
+              className="border-blue-300 text-blue-700 hover:bg-blue-50"
             >
               Cancelar
             </Button>
             <Button 
               onClick={handleCreateForm}
               disabled={!newForm.title.trim() || !newForm.description.trim()}
-              className="bg-purple-600 hover:bg-purple-700 text-white"
+              className="bg-blue-600 hover:bg-blue-700 text-white"
             >
               Crear
             </Button>

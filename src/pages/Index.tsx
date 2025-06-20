@@ -4,7 +4,7 @@ import SearchResults from '@/components/SearchResults/SearchResults';
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex flex-col lg:flex-row w-full bg-gradient-to-br from-purple-50 to-purple-100">
+    <div className="min-h-screen flex flex-col lg:flex-row w-full bg-gradient-to-br">
       {/* Barra lateral izquierda - horizontal en móvil, vertical en desktop */}
       <LeftSidebar />
       
