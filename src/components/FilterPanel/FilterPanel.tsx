@@ -85,11 +85,11 @@ const FilterPanel = () => {
   };
 
   return (
-    <div className="w-full lg:w-80 bg-white border-t lg:border-t-0 lg:border-l border-purple-200 p-4 lg:p-6 lg:h-full overflow-y-auto order-first lg:order-last">
+    <div className="w-full lg:w-80 bg-white border-t lg:border-t-0 lg:border-l border-blue-200 p-4 lg:p-6 lg:h-full overflow-y-auto order-first lg:order-last">
       <div className="space-y-4 lg:space-y-6">
         {/* Campo de búsqueda */}
         <div className="space-y-2">
-          <label className="text-sm font-medium text-purple-900">
+          <label className="text-sm font-medium text-blue-900">
             Búsqueda
           </label>
           <textarea
@@ -106,7 +106,7 @@ const FilterPanel = () => {
             }}
             rows={3}
             style={{ maxHeight: "400px" }}
-            className="border border-purple-200 focus:border-purple-500 focus:ring-purple-500 w-full rounded-md px-3 py-2 text-sm resize-none resize-y"
+            className="border border-blue-200 focus:border-blue-500 focus:ring-blue-500 w-full rounded-md px-3 py-2 text-sm resize-none resize-y"
           />
           <div className="text-sm text-gray-600">
             {remainingWords > 0 ? (
@@ -126,7 +126,7 @@ const FilterPanel = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
           {/* Selector de fecha inicio */}
           <div className="space-y-2">
-            <label className="text-sm font-medium text-purple-900">
+            <label className="text-sm font-medium text-blue-900">
               Fecha de inicio
             </label>
             <Popover>
@@ -134,7 +134,7 @@ const FilterPanel = () => {
                 <Button
                   variant="outline"
                   className={cn(
-                    "w-full justify-start text-left font-normal border-purple-200 hover:bg-purple-50",
+                    "w-full justify-start text-left font-normal border-blue-200 hover:bg-blue-50",
                     !startDate && "text-muted-foreground"
                   )}
                 >
@@ -160,7 +160,7 @@ const FilterPanel = () => {
 
           {/* Selector de fecha final */}
           <div className="space-y-2">
-            <label className="text-sm font-medium text-purple-900">
+            <label className="text-sm font-medium text-blue-900">
               Fecha final
             </label>
             <Popover>
@@ -168,7 +168,7 @@ const FilterPanel = () => {
                 <Button
                   variant="outline"
                   className={cn(
-                    "w-full justify-start text-left font-normal border-purple-200 hover:bg-purple-50",
+                    "w-full justify-start text-left font-normal border-blue-200 hover:bg-blue-50",
                     !endDate && "text-muted-foreground"
                   )}
                 >
@@ -195,7 +195,7 @@ const FilterPanel = () => {
 
         {/* Estados como badges */}
         <div className="space-y-2">
-          <label className="text-sm font-medium text-purple-900">Estados</label>
+          <label className="text-sm font-medium text-blue-900">Estados</label>
           <div className="flex flex-wrap gap-2">
             {states.map((state) => (
               <Badge
@@ -204,8 +204,8 @@ const FilterPanel = () => {
                 className={cn(
                   "cursor-pointer transition-colors text-xs",
                   selectedStates.includes(state)
-                    ? "bg-purple-600 hover:bg-purple-700 text-white"
-                    : "border-purple-300 text-purple-700 hover:bg-purple-100"
+                    ? "bg-blue-600 hover:bg-blue-700 text-white"
+                    : "border-blue-300 text-blue-700 hover:bg-blue-100"
                 )}
                 onClick={() => handleStateToggle(state)}
               >
@@ -220,13 +220,14 @@ const FilterPanel = () => {
           <Button
             variant="outline"
             onClick={handleClear}
-            className="flex-1 border-purple-300 text-purple-700 hover:bg-purple-100"
+            className="flex-1 border-blue-300 text-blue-700 hover:bg-blue-100"
           >
             Limpiar
           </Button>
           <Button
+            variant="outline"
             onClick={handleSubmit(onSubmit)}
-            className="flex-1 bg-purple-600 hover:bg-purple-700 text-white"
+            className="flex-1 border-blue-300 hover:bg-blue-100 text-blue-700"
           >
             Buscar
           </Button>
