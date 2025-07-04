@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 const LoadingSkeleton = () => {
   return (
     <div className="space-y-4">
-      <h2 className="text-xl font-semibold text-blue-800 mb-4">
+      <h2 className="text-xl font-semibold text-blue-500 mb-4">
         Formularios Creados Recientemente
       </h2>
       

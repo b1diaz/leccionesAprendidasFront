@@ -59,7 +59,7 @@ const Forms = () => {
           <div className="max-w-6xl mx-auto">
             {/* Header con botón de crear */}
             <div className="flex justify-between items-center mb-6">
-              <h1 className="text-2xl lg:text-3xl font-bold text-blue-900">
+              <h1 className="text-2xl lg:text-3xl font-bold text-blue-500">
                 Gestión de Formularios
               </h1>
               <Button
@@ -77,7 +77,7 @@ const Forms = () => {
                 <LoadingSkeleton />
               ) : (
                 <>
-                  <h2 className="text-xl font-semibold text-blue-800 mb-4">
+                  <h2 className="text-xl font-semibold text-blue-500 mb-4">
                     Formularios Creados Recientemente
                   </h2>
                   {resultados.length > 0 ? (
@@ -109,7 +109,7 @@ const Forms = () => {
                         No se encontraron resultados
                       </p>
                       <p className="text-gris-600 text-xs lg:text-sm mt-2">
-                        Intenta ajustar los filtros de búsqueda
+                        Intenta creando un formulario
                       </p>
                     </div>
                   )}
