@@ -1,12 +1,19 @@
-import { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Label } from '@/components/ui/label';
-import { Plus } from 'lucide-react';
-import LeftSidebar from '@/components/LeftSidebar/LeftSidebar';
+import { useEffect, useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { Plus } from "lucide-react";
+import LeftSidebar from "@/components/LeftSidebar/LeftSidebar";
+import { useLeccionConCoincidencia } from "@/components/hooks/leccion-con-coincidencia/useLeccionConCoincidencia";
+import LoadingSkeleton from "@/components/ui/loading-skeleton";
 
 interface FormData {
   id: number;
@@ -17,62 +24,35 @@ interface FormData {
 
 const Forms = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [forms, setForms] = useState<FormData[]>([
-    {
-      id: 1,
-      title: 'Formulario de Contacto',
-      description: 'Formulario básico para capturar información de contacto de usuarios',
-      createdAt: '2024-01-15 10:30'
-    },
-    {
-      id: 2,
-      title: 'Encuesta de Satisfacción',
-      description: 'Encuesta para medir la satisfacción del cliente con nuestros servicios',
-      createdAt: '2024-01-14 16:45'
-    },
-    {
-      id: 3,
-      title: 'Registro de Eventos',
-      description: 'Formulario para el registro de asistentes a eventos corporativos',
-      createdAt: '2024-01-13 09:20'
-    }
-  ]);
+  const { isLoading, resultados, onGetLeccionConCoincidencia } =
+    useLeccionConCoincidencia();
+
+  useEffect(() => {
+    const Consulta = "Consulta";
+    onGetLeccionConCoincidencia(Consulta);
+  }, []);
 
   const [newForm, setNewForm] = useState({
-    title: '',
-    description: ''
+    title: "",
+    description: "",
   });
 
   const handleCreateForm = () => {
     if (newForm.title.trim() && newForm.description.trim()) {
-      const newFormData: FormData = {
-        id: forms.length + 1,
-        title: newForm.title,
-        description: newForm.description,
-        createdAt: new Date().toLocaleString('es-ES', {
-          year: 'numeric',
-          month: '2-digit',
-          day: '2-digit',
-          hour: '2-digit',
-          minute: '2-digit'
-        })
-      };
-      
-      setForms([newFormData, ...forms]);
-      setNewForm({ title: '', description: '' });
+      setNewForm({ title: "", description: "" });
       setIsModalOpen(false);
     }
   };
 
   const handleCancel = () => {
-    setNewForm({ title: '', description: '' });
+    setNewForm({ title: "", description: "" });
     setIsModalOpen(false);
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 cloud-bg">
+    <div className="min-h-screen bg-gradient-to-br to-blue-100 cloud-bg">
       <LeftSidebar />
-      
+
       {/* Contenido principal con margen para la barra lateral */}
       <div className="pt-16 lg:pt-0 lg:pl-16">
         <div className="p-4 lg:p-8">
@@ -82,7 +62,7 @@ const Forms = () => {
               <h1 className="text-2xl lg:text-3xl font-bold text-blue-900">
                 Gestión de Formularios
               </h1>
-              <Button 
+              <Button
                 onClick={() => setIsModalOpen(true)}
                 className="bg-blue-600 hover:bg-blue-700 text-white"
               >
@@ -93,38 +73,47 @@ const Forms = () => {
 
             {/* Lista de formularios recientes */}
             <div className="space-y-4">
-              <h2 className="text-xl font-semibold text-blue-800 mb-4">
-                Formularios Creados Recientemente
-              </h2>
-              
-              {forms.map((form) => (
-                <Card 
-                  key={form.id} 
-                  className="bg-white/80 backdrop-blur-sm border-blue-200 hover:shadow-lg transition-shadow"
-                >
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-blue-800 text-lg">
-                      {form.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-blue-700 mb-3 text-sm">
-                      {form.description}
-                    </p>
-                    <p className="text-xs text-blue-600">
-                      Creado: {form.createdAt}
-                    </p>
-                  </CardContent>
-                </Card>
-              ))}
-
-              {forms.length === 0 && (
-                <div className="text-center py-12">
-                  <p className="text-blue-600 text-lg">No hay formularios creados</p>
-                  <p className="text-blue-500 text-sm mt-2">
-                    Crea tu primer formulario usando el botón de arriba
-                  </p>
-                </div>
+              {isLoading ? (
+                <LoadingSkeleton />
+              ) : (
+                <>
+                  <h2 className="text-xl font-semibold text-blue-800 mb-4">
+                    Formularios Creados Recientemente
+                  </h2>
+                  {resultados.length > 0 ? (
+                    resultados.map((result) => (
+                      <Card
+                        key={result.leccion.id}
+                        className="bg-white/80 backdrop-blur-sm border-blue-200 hover:shadow-lg transition-shadow"
+                      >
+                        <CardHeader className="pb-2">
+                          <CardTitle className="text-blue-800 text-lg">
+                            {result.leccion.titulo}
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="text-blue-700 mb-3 text-sm">
+                            {result.leccion.descripcion}
+                          </p>
+                        </CardContent>
+                      </Card>
+                    ))
+                  ) : (
+                    <div className="flex flex-col items-center justify-center text-center h-[60vh]">
+                      <img
+                        src="/images/logo.png"
+                        alt="Logo"
+                        className="w-35 h-20 mb-2"
+                      />
+                      <p className="text-gris-600 text-base lg:text-lg">
+                        No se encontraron resultados
+                      </p>
+                      <p className="text-gris-600 text-xs lg:text-sm mt-2">
+                        Intenta ajustar los filtros de búsqueda
+                      </p>
+                    </div>
+                  )}
+                </>
               )}
             </div>
           </div>
@@ -139,7 +128,7 @@ const Forms = () => {
               Crear Nuevo Formulario
             </DialogTitle>
           </DialogHeader>
-          
+
           <div className="space-y-4 mt-4">
             <div>
               <Label htmlFor="title" className="text-blue-800 font-medium">
@@ -148,20 +137,27 @@ const Forms = () => {
               <Input
                 id="title"
                 value={newForm.title}
-                onChange={(e) => setNewForm({ ...newForm, title: e.target.value })}
+                onChange={(e) =>
+                  setNewForm({ ...newForm, title: e.target.value })
+                }
                 placeholder="Ingresa el título del formulario"
                 className="mt-1 border-blue-200 focus:border-blue-500"
               />
             </div>
 
             <div>
-              <Label htmlFor="description" className="text-blue-800 font-medium">
+              <Label
+                htmlFor="description"
+                className="text-blue-800 font-medium"
+              >
                 Descripción
               </Label>
               <Textarea
                 id="description"
                 value={newForm.description}
-                onChange={(e) => setNewForm({ ...newForm, description: e.target.value })}
+                onChange={(e) =>
+                  setNewForm({ ...newForm, description: e.target.value })
+                }
                 placeholder="Describe el propósito de este formulario"
                 className="mt-1 border-blue-200 focus:border-blue-500 min-h-[100px]"
               />
@@ -169,14 +165,14 @@ const Forms = () => {
           </div>
 
           <div className="flex justify-end gap-3 mt-6">
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               onClick={handleCancel}
               className="border-blue-300 text-blue-700 hover:bg-blue-50"
             >
               Cancelar
             </Button>
-            <Button 
+            <Button
               onClick={handleCreateForm}
               disabled={!newForm.title.trim() || !newForm.description.trim()}
               className="bg-blue-600 hover:bg-blue-700 text-white"
