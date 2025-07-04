@@ -13,7 +13,7 @@ const LeftSidebar = () => {
   ];
 
   return (
-    <div className="fixed top-0 left-0 w-full h-16 lg:h-full lg:w-16 border-b lg:border-b-0 lg:border-r border-blue-200 flex lg:flex-col items-center justify-center lg:justify-start py-2 lg:py-6 px-4 lg:px-0 z-10">
+    <div className="fixed top-0 left-0 w-full h-16 lg:h-full lg:w-16 border-b lg:border-b-0 lg:border-r border-blue-200 bg-gris-100 flex lg:flex-col items-center justify-center lg:justify-start py-2 lg:py-6 px-4 lg:px-0 z-10">
       <div className="flex lg:flex-col space-x-4 lg:space-x-0 lg:space-y-4">
         <div
           className="flex justify-center items-center cursor-pointer"
