@@ -38,7 +38,7 @@ const SearchResults = () => {
       : null;
 
   return (
-    <div className="flex-1 p-4 lg:p-8 bg-background min-h-screen">
+    <div className="flex-1 p-4 lg:p-8 bg-background cloud-bg min-h-screen">
       <div className="max-w-4xl mx-auto">
         <h2 className="text-xl lg:text-2xl font-bold text-blue-500 mb-4 lg:mb-6">
           Resultados de búsqueda
@@ -54,6 +54,7 @@ const SearchResults = () => {
                   <Card
                     key={result.leccion.id}
                     onClick={() => handleClick(result.leccion.id)}
+                    className="bg-white/80 backdrop-blur-sm border-blue-200 hover:shadow-lg transition-shadow cursor-pointer"
                   >
                     <CardHeader className="pb-2 lg:pb-4">
                       <CardTitle className="text-blue-800 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-base lg:text-lg">
