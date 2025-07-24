@@ -38,9 +38,9 @@ const SearchResults = () => {
       : null;
 
   return (
-    <div className="flex-1 p-4 lg:p-8 bg-background cloud-bg min-h-screen">
+    <div className="flex-1 p-4 lg:p-8 bg-negro-50 cloud-bg min-h-screen">
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-xl lg:text-2xl font-bold text-blue-500 mb-4 lg:mb-6">
+        <h2 className="text-xl lg:text-2xl font-bold text-negro-600 mb-4 lg:mb-6">
           Resultados de búsqueda
         </h2>
 
@@ -54,17 +54,17 @@ const SearchResults = () => {
                   <Card
                     key={result.leccion.id}
                     onClick={() => handleClick(result.leccion.id)}
-                    className="bg-white/80 backdrop-blur-sm border-blue-200 hover:shadow-lg transition-shadow cursor-pointer"
+                    className="bg-negro-75 hover:shadow-lg transition-shadow cursor-pointer"
                   >
                     <CardHeader className="pb-2 lg:pb-4">
-                      <CardTitle className="text-blue-800 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-base lg:text-lg">
+                      <CardTitle className="text-negro-900 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-base lg:text-lg">
                         <span className="truncate">
                           {result.leccion.titulo}
                         </span>
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="pt-0">
-                      <p className="text-blue-700 mb-2 text-sm lg:text-base">
+                      <p className="text-negro-600 mb-2 text-sm lg:text-base">
                         {result.leccion.descripcion}
                       </p>
                     </CardContent>
@@ -95,10 +95,10 @@ const SearchResults = () => {
           {selectedResult && (
             <>
               <DialogHeader>
-                <DialogTitle className="text-blue-900 text-xl">
+                <DialogTitle className="text-negro-900 text-xl">
                   {selectedResult.leccion.titulo}
                 </DialogTitle>
-                <DialogDescription className="text-blue-700 text-base">
+                <DialogDescription className="text-negro-600 text-base">
                   {selectedResult.leccion.descripcion}
                 </DialogDescription>
               </DialogHeader>
