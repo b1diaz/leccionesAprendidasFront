@@ -38,7 +38,7 @@ const SearchResults = () => {
       : null;
 
   return (
-    <div className="flex-1 p-4 lg:p-8 bg-negro-50 cloud-bg min-h-screen">
+    <div className="flex-1 p-4 lg:p-8 bg-negro-50 cloud-bg ">
       <div className="max-w-4xl mx-auto">
         <h2 className="text-xl lg:text-2xl font-bold text-negro-600 mb-4 lg:mb-6">
           Resultados de búsqueda
