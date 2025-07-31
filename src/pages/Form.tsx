@@ -59,7 +59,7 @@ const Forms = () => {
           <div className="max-w-6xl mx-auto">
             {/* Header con botón de crear */}
             <div className="flex justify-between items-center mb-6">
-              <h1 className="text-2xl lg:text-3xl font-bold text-blue-500">
+              <h1 className="text-2xl lg:text-3xl font-bold text-negro-900">
                 Gestión de Formularios
               </h1>
               <Button
@@ -77,22 +77,22 @@ const Forms = () => {
                 <LoadingSkeleton />
               ) : (
                 <>
-                  <h2 className="text-xl font-semibold text-blue-500 mb-4">
+                  <h2 className="text-xl font-semibold text-negro-600 mb-4">
                     Formularios Creados Recientemente
                   </h2>
                   {resultados.length > 0 ? (
                     resultados.map((result) => (
                       <Card
                         key={result.leccion.id}
-                        className="bg-white/80 backdrop-blur-sm border-blue-200 hover:shadow-lg transition-shadow"
+                        className="bg-white/80 backdrop-blur-sm hover:shadow-lg transition-shadow"
                       >
                         <CardHeader className="pb-2">
-                          <CardTitle className="text-blue-800 text-lg">
+                          <CardTitle className="text-negro-900 text-lg">
                             {result.leccion.titulo}
                           </CardTitle>
                         </CardHeader>
                         <CardContent>
-                          <p className="text-blue-700 mb-3 text-sm">
+                          <p className="text-negro-700 mb-3 text-sm">
                             {result.leccion.descripcion}
                           </p>
                         </CardContent>
@@ -124,14 +124,14 @@ const Forms = () => {
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
         <DialogContent className="bg-white border-blue-200 max-w-md">
           <DialogHeader>
-            <DialogTitle className="text-blue-900 text-xl">
+            <DialogTitle className="text-negro-900 text-xl">
               Crear Nuevo Formulario
             </DialogTitle>
           </DialogHeader>
 
           <div className="space-y-4 mt-4">
             <div>
-              <Label htmlFor="title" className="text-blue-800 font-medium">
+              <Label htmlFor="title" className="text-negro-800 font-medium">
                 Título
               </Label>
               <Input
@@ -141,14 +141,14 @@ const Forms = () => {
                   setNewForm({ ...newForm, title: e.target.value })
                 }
                 placeholder="Ingresa el título del formulario"
-                className="mt-1 border-blue-200 focus:border-blue-500"
+                className="mt-1 focus:border-nego-300"
               />
             </div>
 
             <div>
               <Label
                 htmlFor="description"
-                className="text-blue-800 font-medium"
+                className="text-negro-900 font-medium"
               >
                 Descripción
               </Label>
@@ -159,7 +159,7 @@ const Forms = () => {
                   setNewForm({ ...newForm, description: e.target.value })
                 }
                 placeholder="Describe el propósito de este formulario"
-                className="mt-1 border-blue-200 focus:border-blue-500 min-h-[100px]"
+                className="mt-1 focus:border-negro-300 min-h-[100px]"
               />
             </div>
           </div>
@@ -168,14 +168,14 @@ const Forms = () => {
             <Button
               variant="outline"
               onClick={handleCancel}
-              className="border-blue-300 text-blue-700 hover:bg-blue-50"
+              className="border-negro-100 hover:bg-blue-50"
             >
               Cancelar
             </Button>
             <Button
               onClick={handleCreateForm}
               disabled={!newForm.title.trim() || !newForm.description.trim()}
-              className="bg-blue-600 hover:bg-blue-700 text-white"
+              className="bg-negro-600 hover:bg-negro-600 text-white"
             >
               Crear
             </Button>
