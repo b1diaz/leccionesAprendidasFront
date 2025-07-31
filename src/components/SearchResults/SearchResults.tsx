@@ -54,7 +54,7 @@ const SearchResults = () => {
                   <Card
                     key={result.leccion.id}
                     onClick={() => handleClick(result.leccion.id)}
-                    className="bg-negro-75 hover:shadow-lg transition-shadow cursor-pointer"
+                    className="bg-negro-75 hover:shadow-lg shadow-md transition-shadow cursor-pointer "
                   >
                     <CardHeader className="pb-2 lg:pb-4">
                       <CardTitle className="text-negro-900 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-base lg:text-lg">
