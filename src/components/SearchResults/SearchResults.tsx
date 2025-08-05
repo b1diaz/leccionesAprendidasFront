@@ -99,7 +99,84 @@ const SearchResults = () => {
                   {selectedResult.leccion.titulo}
                 </DialogTitle>
                 <DialogDescription className="text-negro-600 text-base">
-                  {selectedResult.leccion.descripcion}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-sm font-medium text-negro-900">
+                        Descripción:
+                      </label>
+                      <textarea
+                        rows={1}
+                        className="w-full bg-gris-100 border rounded-md px-3 py-2 text-sm resize-none  resize-y"
+                        readOnly
+                        value={selectedResult?.leccion.descripcion}
+                      />
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium text-negro-900">
+                        Código de registro:
+                      </label>
+                      <textarea
+                        rows={1}
+                        className="w-full bg-gris-100 border rounded-md px-3 py-2 text-sm resize-none  resize-y"
+                        readOnly
+                        value={selectedResult?.leccion.codigoDeRegistro}
+                      />
+                    </div>
+
+                    <div>
+                      <label className="text-sm font-medium text-negro-900">
+                        Fecha y hora del evento:
+                      </label>
+                      <textarea
+                        rows={1}
+                        className="w-full bg-gris-100 border rounded-md px-3 py-2 text-sm resize-none  resize-y"
+                        readOnly
+                        value={
+                          selectedResult?.leccion.fechaYHoraDelEvento
+                            ? new Date(
+                                selectedResult.leccion.fechaYHoraDelEvento
+                              ).toLocaleString("es-CO", {
+                                dateStyle: "full",
+                                timeStyle: "short",
+                              })
+                            : ""
+                        }
+                      />
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium text-negro-900">
+                        Cargo relacionado:
+                      </label>
+                      <textarea
+                        rows={1}
+                        className="w-full bg-gris-100 border rounded-md px-3 py-2 text-sm resize-none  resize-y"
+                        readOnly
+                        value={selectedResult?.leccion.cargoRelacionado}
+                      />
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium text-negro-900">
+                        Ubicación:
+                      </label>
+                      <textarea
+                        rows={1}
+                        className="w-full bg-gris-100 border rounded-md px-3 py-2 text-sm resize-none  resize-y"
+                        readOnly
+                        value={selectedResult?.leccion.ubicacion}
+                      />
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium text-negro-900">
+                        Tipo de situación:
+                      </label>
+                      <textarea
+                        rows={1}
+                        className="w-full bg-gris-100 border rounded-md px-3 py-2 text-sm resize-none  resize-y"
+                        readOnly
+                        value={selectedResult?.leccion.tipoDeSituacion}
+                      />
+                    </div>
+                  </div>
                 </DialogDescription>
               </DialogHeader>
             </>
