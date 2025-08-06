@@ -76,12 +76,13 @@ const SearchResults = () => {
                       </p>
                       <p className="text-negro-600 mb-2 text-sm lg:text-base">
                         {result.Lesson.dateTime
-                          ? new Date(
-                              result.Lesson.dateTime
-                            ).toLocaleString("es-CO", {
-                              dateStyle: "full",
-                              timeStyle: "short",
-                            })
+                          ? new Date(result.Lesson.dateTime).toLocaleString(
+                              "es-CO",
+                              {
+                                dateStyle: "full",
+                                timeStyle: "short",
+                              }
+                            )
                           : ""}
                       </p>
                     </CardContent>
@@ -108,7 +109,7 @@ const SearchResults = () => {
       </div>
 
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent className="border-blue-200 max-w-2xl">
+        <DialogContent className="border-blue-200 max-w-2xl max-h-[90vh] overflow-y-auto">
           {selectedResult && (
             <>
               <DialogHeader>
@@ -120,7 +121,7 @@ const SearchResults = () => {
                       </label>
                       <textarea
                         rows={1}
-                        className="w-full bg-gris-100 border rounded-md px-3 py-2 text-sm resize-none  resize-y"
+                        className="w-full bg-gris-100 border rounded-md px-3 py-2 text-sm resize-none resize-y"
                         readOnly
                         value={
                           selectedResult?.Lesson.dateTime
@@ -140,7 +141,7 @@ const SearchResults = () => {
                       </label>
                       <textarea
                         rows={1}
-                        className="w-full bg-gris-100 border rounded-md px-3 py-2 text-sm resize-none  resize-y"
+                        className="w-full bg-gris-100 border rounded-md px-3 py-2 text-sm resize-none resize-y"
                         readOnly
                         value={selectedResult?.Lesson.relatedPosition}
                       />
@@ -151,7 +152,7 @@ const SearchResults = () => {
                       </label>
                       <textarea
                         rows={1}
-                        className="w-full bg-gris-100 border rounded-md px-3 py-2 text-sm resize-none  resize-y"
+                        className="w-full bg-gris-100 border rounded-md px-3 py-2 text-sm resize-none resize-y"
                         readOnly
                         value={selectedResult?.Lesson.situationType}
                       />
@@ -162,22 +163,24 @@ const SearchResults = () => {
                       </label>
                       <textarea
                         rows={1}
-                        className="w-full bg-gris-100 border rounded-md px-3 py-2 text-sm resize-none  resize-y"
+                        className="w-full bg-gris-100 border rounded-md px-3 py-2 text-sm resize-none resize-y"
                         readOnly
                         value={selectedResult?.Lesson.location}
                       />
                     </div>
                   </div>
+
                   <br />
                   <br />
-                  <div className="grid grid-cols-2 md:grid-cols-1 gap-4">
+
+                  <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
                     <div>
                       <label className="text-sm font-medium text-negro-900">
                         Descripción:
                       </label>
                       <textarea
                         rows={4}
-                        className="w-full bg-gris-100 border rounded-md px-3 py-2 text-sm resize-none  resize-y"
+                        className="w-full bg-gris-100 border rounded-md px-3 py-2 text-sm resize-none resize-y"
                         readOnly
                         value={selectedResult?.Lesson.description}
                       />
@@ -188,7 +191,7 @@ const SearchResults = () => {
                       </label>
                       <textarea
                         rows={4}
-                        className="w-full bg-gris-100 border rounded-md px-3 py-2 text-sm resize-none  resize-y"
+                        className="w-full bg-gris-100 border rounded-md px-3 py-2 text-sm resize-none resize-y"
                         readOnly
                         value={selectedResult?.Lesson.analysis}
                       />
@@ -199,7 +202,7 @@ const SearchResults = () => {
                       </label>
                       <textarea
                         rows={4}
-                        className="w-full bg-gris-100 border rounded-md px-3 py-2 text-sm resize-none  resize-y"
+                        className="w-full bg-gris-100 border rounded-md px-3 py-2 text-sm resize-none resize-y"
                         readOnly
                         value={selectedResult?.Lesson.consequences}
                       />
@@ -210,7 +213,7 @@ const SearchResults = () => {
                       </label>
                       <textarea
                         rows={4}
-                        className="w-full bg-gris-100 border rounded-md px-3 py-2 text-sm resize-none  resize-y"
+                        className="w-full bg-gris-100 border rounded-md px-3 py-2 text-sm resize-none resize-y"
                         readOnly
                         value={selectedResult?.Lesson.lesson}
                       />
