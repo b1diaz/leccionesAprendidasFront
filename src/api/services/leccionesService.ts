@@ -4,7 +4,7 @@ export interface QueryDto {
 
 //Método POST
 export const buscarLeccionesConCoincidencia = async (datos: QueryDto) => {
-  const url = `${import.meta.env.VITE_API_URL}/BuscarLecciones?code=${import.meta.env.VITE_API_KEY}`;
+  const url = `${import.meta.env.VITE_API_URL}/searchlessons?code=${import.meta.env.VITE_API_KEY}`;
 
   const response = await fetch(url, {
     method: "POST",
