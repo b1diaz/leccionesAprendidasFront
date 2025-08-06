@@ -23,18 +23,18 @@ const SearchResults = () => {
   }, [searchParams]);
 
   const getLeccionConCoincidencia = () => {
-    const Consulta = searchParams.get("Consulta");
-    onGetLeccionConCoincidencia(Consulta);
+    const Query = searchParams.get("Query");
+    onGetLeccionConCoincidencia(Query);
   };
 
-  const handleClick = (resultId: string) => {
-    setSelectedResultId(resultId);
+  const handleClick = (Id: string) => {
+    setSelectedResultId(Id);
     setIsModalOpen(true);
   };
 
   const selectedResult =
     selectedResultId !== null
-      ? resultados.find((r) => r.leccion.id === selectedResultId)
+      ? resultados.find((r) => r.Lesson.Id === selectedResultId)
       : null;
 
   return (
@@ -52,20 +52,37 @@ const SearchResults = () => {
               <div className="space-y-3 lg:space-y-4">
                 {resultados.map((result) => (
                   <Card
-                    key={result.leccion.id}
-                    onClick={() => handleClick(result.leccion.id)}
+                    key={result.Lesson.Id}
+                    onClick={() => handleClick(result.Lesson.Id)}
                     className="bg-negro-75 hover:shadow-lg shadow-md transition-shadow cursor-pointer "
                   >
                     <CardHeader className="pb-2 lg:pb-4">
                       <CardTitle className="text-negro-900 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-base lg:text-lg">
                         <span className="truncate">
-                          {result.leccion.titulo}
+                          {result.Lesson.relatedPosition}
+                        </span>
+                        <span
+                          className={
+                            "text-xs text-white bg-blue-600 px-2 py-1 rounded-full self-start sm:self-auto"
+                          }
+                        >
+                          {result.Lesson.situationType}
                         </span>
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="pt-0">
                       <p className="text-negro-600 mb-2 text-sm lg:text-base">
-                        {result.leccion.descripcion}
+                        {result.Lesson.description}
+                      </p>
+                      <p className="text-negro-600 mb-2 text-sm lg:text-base">
+                        {result.Lesson.dateTime
+                          ? new Date(
+                              result.Lesson.dateTime
+                            ).toLocaleString("es-CO", {
+                              dateStyle: "full",
+                              timeStyle: "short",
+                            })
+                          : ""}
                       </p>
                     </CardContent>
                   </Card>
@@ -95,34 +112,8 @@ const SearchResults = () => {
           {selectedResult && (
             <>
               <DialogHeader>
-                <DialogTitle className="text-negro-900 text-xl">
-                  {selectedResult.leccion.titulo}
-                </DialogTitle>
                 <DialogDescription className="text-negro-600 text-base">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="text-sm font-medium text-negro-900">
-                        Descripción:
-                      </label>
-                      <textarea
-                        rows={1}
-                        className="w-full bg-gris-100 border rounded-md px-3 py-2 text-sm resize-none  resize-y"
-                        readOnly
-                        value={selectedResult?.leccion.descripcion}
-                      />
-                    </div>
-                    <div>
-                      <label className="text-sm font-medium text-negro-900">
-                        Código de registro:
-                      </label>
-                      <textarea
-                        rows={1}
-                        className="w-full bg-gris-100 border rounded-md px-3 py-2 text-sm resize-none  resize-y"
-                        readOnly
-                        value={selectedResult?.leccion.codigoDeRegistro}
-                      />
-                    </div>
-
                     <div>
                       <label className="text-sm font-medium text-negro-900">
                         Fecha y hora del evento:
@@ -132,9 +123,9 @@ const SearchResults = () => {
                         className="w-full bg-gris-100 border rounded-md px-3 py-2 text-sm resize-none  resize-y"
                         readOnly
                         value={
-                          selectedResult?.leccion.fechaYHoraDelEvento
+                          selectedResult?.Lesson.dateTime
                             ? new Date(
-                                selectedResult.leccion.fechaYHoraDelEvento
+                                selectedResult.Lesson.dateTime
                               ).toLocaleString("es-CO", {
                                 dateStyle: "full",
                                 timeStyle: "short",
@@ -151,18 +142,7 @@ const SearchResults = () => {
                         rows={1}
                         className="w-full bg-gris-100 border rounded-md px-3 py-2 text-sm resize-none  resize-y"
                         readOnly
-                        value={selectedResult?.leccion.cargoRelacionado}
-                      />
-                    </div>
-                    <div>
-                      <label className="text-sm font-medium text-negro-900">
-                        Ubicación:
-                      </label>
-                      <textarea
-                        rows={1}
-                        className="w-full bg-gris-100 border rounded-md px-3 py-2 text-sm resize-none  resize-y"
-                        readOnly
-                        value={selectedResult?.leccion.ubicacion}
+                        value={selectedResult?.Lesson.relatedPosition}
                       />
                     </div>
                     <div>
@@ -173,7 +153,66 @@ const SearchResults = () => {
                         rows={1}
                         className="w-full bg-gris-100 border rounded-md px-3 py-2 text-sm resize-none  resize-y"
                         readOnly
-                        value={selectedResult?.leccion.tipoDeSituacion}
+                        value={selectedResult?.Lesson.situationType}
+                      />
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium text-negro-900">
+                        Ubicación:
+                      </label>
+                      <textarea
+                        rows={1}
+                        className="w-full bg-gris-100 border rounded-md px-3 py-2 text-sm resize-none  resize-y"
+                        readOnly
+                        value={selectedResult?.Lesson.location}
+                      />
+                    </div>
+                  </div>
+                  <br />
+                  <br />
+                  <div className="grid grid-cols-2 md:grid-cols-1 gap-4">
+                    <div>
+                      <label className="text-sm font-medium text-negro-900">
+                        Descripción:
+                      </label>
+                      <textarea
+                        rows={4}
+                        className="w-full bg-gris-100 border rounded-md px-3 py-2 text-sm resize-none  resize-y"
+                        readOnly
+                        value={selectedResult?.Lesson.description}
+                      />
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium text-negro-900">
+                        Análisis:
+                      </label>
+                      <textarea
+                        rows={4}
+                        className="w-full bg-gris-100 border rounded-md px-3 py-2 text-sm resize-none  resize-y"
+                        readOnly
+                        value={selectedResult?.Lesson.analysis}
+                      />
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium text-negro-900">
+                        Consecuencias reales o potenciales:
+                      </label>
+                      <textarea
+                        rows={4}
+                        className="w-full bg-gris-100 border rounded-md px-3 py-2 text-sm resize-none  resize-y"
+                        readOnly
+                        value={selectedResult?.Lesson.consequences}
+                      />
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium text-negro-900">
+                        Lección:
+                      </label>
+                      <textarea
+                        rows={4}
+                        className="w-full bg-gris-100 border rounded-md px-3 py-2 text-sm resize-none  resize-y"
+                        readOnly
+                        value={selectedResult?.Lesson.lesson}
                       />
                     </div>
                   </div>

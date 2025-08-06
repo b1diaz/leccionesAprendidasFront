@@ -28,8 +28,8 @@ const Forms = () => {
     useLeccionConCoincidencia();
 
   useEffect(() => {
-    const Consulta = "Consulta";
-    onGetLeccionConCoincidencia(Consulta);
+    const Query = "Query";
+    onGetLeccionConCoincidencia(Query);
   }, []);
 
   const [newForm, setNewForm] = useState({

@@ -16,8 +16,8 @@ import { useForm } from "react-hook-form";
 import { useSearchParams } from "react-router-dom";
 import * as yup from "yup";
 
-const schema: yup.ObjectSchema<{ Consulta?: string }> = yup.object({
-  Consulta: yup.string().optional(),
+const schema: yup.ObjectSchema<{ Query?: string }> = yup.object({
+  Query: yup.string().optional(),
 });
 
 type FormData = yup.InferType<typeof schema>;
@@ -48,7 +48,7 @@ const FilterPanel = () => {
   };
 
   const handleClear = () => {
-    setValue("Consulta", "");
+    setValue("Query", "");
     setStartDate(undefined);
     setEndDate(undefined);
     setSelectedStates([]);
@@ -56,29 +56,29 @@ const FilterPanel = () => {
 
   const maxWords = 30;
 
-  const watchConsulta = watch("Consulta") || "";
+  const watchQuery = watch("Query") || "";
   const wordCount =
-    watchConsulta.trim() === "" ? 0 : watchConsulta.trim().split(/\s+/).length;
+    watchQuery.trim() === "" ? 0 : watchQuery.trim().split(/\s+/).length;
   const remainingWords = maxWords - wordCount;
 
   useEffect(() => {
-    const Consulta = searchParams.get("Consulta");
+    const Query = searchParams.get("Query");
 
-    if (Consulta) {
-      setValue("Consulta", Consulta);
+    if (Query) {
+      setValue("Query", Query);
     }
   }, [searchParams]);
 
   const onSubmit = (data: FormData) => {
-    let { Consulta } = data;
+    let { Query } = data;
 
-    if (Consulta) {
-      const words = Consulta.trim().split(/\s+/);
+    if (Query) {
+      const words = Query.trim().split(/\s+/);
       if (words.length > maxWords) {
-        Consulta = words.slice(0, maxWords).join(" ");
+        Query = words.slice(0, maxWords).join(" ");
       }
 
-      setSearchParams({ Consulta });
+      setSearchParams({ Query });
     } else {
       setSearchParams({});
     }
@@ -91,15 +91,15 @@ const FilterPanel = () => {
         <div className="space-y-2">
           <label className="text-sm font-medium text-negro-900">Búsqueda</label>
           <textarea
-            {...register("Consulta")}
-            name="Consulta"
+            {...register("Query")}
+            name="Query"
             placeholder="Buscar..."
-            value={watchConsulta}
+            value={watchQuery}
             onChange={(e) => {
               const input = e.target.value;
               const words = input.trim().split(/\s+/);
               if (words.length <= maxWords) {
-                setValue("Consulta", input);
+                setValue("Query", input);
               }
             }}
             rows={3}
