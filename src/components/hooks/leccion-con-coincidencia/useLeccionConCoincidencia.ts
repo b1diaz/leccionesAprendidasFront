@@ -5,10 +5,10 @@ export const useLeccionConCoincidencia = () => {
   const [resultados, setResultados] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const onGetLeccionConCoincidencia = async (Consulta: string) => {
+  const onGetLeccionConCoincidencia = async (Query: string) => {
     setIsLoading(true);
     try {
-      const data = await buscarLeccionesConCoincidencia({ Consulta });
+      const data = await buscarLeccionesConCoincidencia({ Query });
       setResultados(data);
     } catch (error) {
       console.error("Error al obtener resultados", error);
