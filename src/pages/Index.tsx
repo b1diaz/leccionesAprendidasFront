@@ -8,11 +8,11 @@ const Index = () => {
       <LeftSidebar />
 
       <div className="flex-1 flex flex-col lg:flex-row mt-16 lg:mt-0 lg:ml-16">
-        <div className="flex-1 flex flex-col">
+        <div className="flex-1 flex flex-col bg-negro-50">
           <SearchResults />
           <div className="relative h-[160px] mt-[2rem]">
             <svg
-              className="absolute bottom-0 left-0 w-full h-[160px]"
+              className="absolute bottom-0 left-0 w-full h-[160px] bg-negro-50"
               viewBox="0 0 1440 320"
               preserveAspectRatio="none"
             >
