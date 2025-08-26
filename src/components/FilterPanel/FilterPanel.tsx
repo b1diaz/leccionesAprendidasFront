@@ -8,6 +8,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import Autocomplete from "@mui/material/Autocomplete";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import { CalendarIcon } from "lucide-react";
@@ -15,12 +16,20 @@ import { cn } from "@/lib/utils";
 import { useForm } from "react-hook-form";
 import { useSearchParams } from "react-router-dom";
 import * as yup from "yup";
+import Checkbox from "@mui/material/Checkbox";
+import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
+import CheckBoxIcon from "@mui/icons-material/CheckBox";
+import TextField from "@mui/material/TextField";
+import MultiSelect from "../ui/check-boxes";
 
 const schema: yup.ObjectSchema<{ Query?: string }> = yup.object({
   Query: yup.string().optional(),
 });
 
 type FormData = yup.InferType<typeof schema>;
+
+const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
+const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const FilterPanel = () => {
   const [startDate, setStartDate] = useState<Date>();
@@ -193,23 +202,17 @@ const FilterPanel = () => {
 
         {/* Estados como badges */}
         <div className="space-y-2">
-          <label className="text-sm font-medium text-negro-900">Estados</label>
+          <label className="text-sm font-medium text-negro-900">
+            Tipos de estados
+          </label>
           <div className="flex flex-wrap gap-2">
-            {states.map((state) => (
-              <Badge
-                key={state}
-                variant={selectedStates.includes(state) ? "default" : "outline"}
-                className={cn(
-                  "cursor-pointer transition-colors text-xs",
-                  selectedStates.includes(state)
-                    ? "bg-blue-600 hover:bg-blue-700 text-white"
-                    : " text-blue-700 hover:bg-blue-100"
-                )}
-                onClick={() => handleStateToggle(state)}
-              >
-                {state}
-              </Badge>
-            ))}
+
+            <MultiSelect
+              options={states}
+              label="Estados"
+              placeholder="Favoritas"
+              getOptionLabel={(states) => states}
+            />
           </div>
         </div>
 
