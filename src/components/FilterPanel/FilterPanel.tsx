@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import Autocomplete from "@mui/material/Autocomplete";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import { CalendarIcon } from "lucide-react";
@@ -16,11 +14,7 @@ import { cn } from "@/lib/utils";
 import { useForm } from "react-hook-form";
 import { useSearchParams } from "react-router-dom";
 import * as yup from "yup";
-import Checkbox from "@mui/material/Checkbox";
-import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
-import CheckBoxIcon from "@mui/icons-material/CheckBox";
-import TextField from "@mui/material/TextField";
-import MultiSelect from "../ui/check-boxes";
+import MultiSelect from "../ui/multi-select";
 
 const schema: yup.ObjectSchema<{ Query?: string }> = yup.object({
   Query: yup.string().optional(),
@@ -28,39 +22,37 @@ const schema: yup.ObjectSchema<{ Query?: string }> = yup.object({
 
 type FormData = yup.InferType<typeof schema>;
 
-const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
-const checkedIcon = <CheckBoxIcon fontSize="small" />;
+type FilterProps = {
+  handleCreateNew: () => void;
+};
 
-const FilterPanel = () => {
+interface StateOption {
+  title: string;
+  isNew?: boolean;
+}
+
+const FilterPanel = ({ handleCreateNew }: FilterProps) => {
   const [startDate, setStartDate] = useState<Date>();
   const [endDate, setEndDate] = useState<Date>();
-  const [selectedStates, setSelectedStates] = useState<string[]>([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const { watch, register, handleSubmit, setValue } = useForm<FormData>({
     resolver: yupResolver(schema),
   });
 
-  const states = [
-    "Activo",
-    "Inactivo",
-    "Pendiente",
-    "Completado",
-    "Cancelado",
-    "En Proceso",
-    "Suspendido",
-  ];
-
-  const handleStateToggle = (state: string) => {
-    setSelectedStates((prev) =>
-      prev.includes(state) ? prev.filter((s) => s !== state) : [...prev, state]
-    );
-  };
+  const [states] = useState<StateOption[]>([
+    { title: "Activo" },
+    { title: "Inactivo" },
+    { title: "Pendiente" },
+    { title: "Completado" },
+    { title: "Cancelado" },
+    { title: "En Proceso" },
+    { title: "Suspendido" },
+  ]);
 
   const handleClear = () => {
     setValue("Query", "");
     setStartDate(undefined);
     setEndDate(undefined);
-    setSelectedStates([]);
   };
 
   const maxWords = 30;
@@ -96,7 +88,6 @@ const FilterPanel = () => {
   return (
     <div className="w-full lg:w-80 bg-white border-t lg:border-t-0 p-4 lg:p-6 lg:h-full overflow-y-auto order-first lg:order-last">
       <div className="space-y-4 lg:space-y-6">
-        {/* Campo de búsqueda */}
         <div className="space-y-2">
           <label className="text-sm font-medium text-negro-900">Búsqueda</label>
           <textarea
@@ -129,9 +120,7 @@ const FilterPanel = () => {
           </div>
         </div>
 
-        {/* Selectores de fecha - en fila en móvil, en columna en desktop */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
-          {/* Selector de fecha inicio */}
           <div className="space-y-2">
             <label className="text-sm font-medium text-negro-900">
               Fecha de inicio
@@ -165,7 +154,6 @@ const FilterPanel = () => {
             </Popover>
           </div>
 
-          {/* Selector de fecha final */}
           <div className="space-y-2">
             <label className="text-sm font-medium text-negro-900">
               Fecha final
@@ -200,23 +188,21 @@ const FilterPanel = () => {
           </div>
         </div>
 
-        {/* Estados como badges */}
         <div className="space-y-2">
           <label className="text-sm font-medium text-negro-900">
             Tipos de estados
           </label>
           <div className="flex flex-wrap gap-2">
-
             <MultiSelect
               options={states}
               label="Estados"
-              placeholder="Favoritas"
-              getOptionLabel={(states) => states}
+              getOptionLabel={(states) => states.title}
+              onChange={(values) => values}
+              onClick={handleCreateNew}
             />
           </div>
         </div>
 
-        {/* Botones */}
         <div className="flex gap-3 pt-2 lg:pt-4">
           <Button
             variant="outline"

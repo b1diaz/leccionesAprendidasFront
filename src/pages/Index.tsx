@@ -1,15 +1,18 @@
 import LeftSidebar from "@/components/LeftSidebar/LeftSidebar";
 import FilterPanel from "@/components/FilterPanel/FilterPanel";
 import SearchResults from "@/components/SearchResults/SearchResults";
+import { useState } from "react";
 
 const Index = () => {
+  const [open, setOpen] = useState(false);
+
   return (
     <div className="min-h-screen flex flex-col lg:flex-row bg-gradient-to-br">
       <LeftSidebar />
 
       <div className="flex-1 flex flex-col lg:flex-row mt-16 lg:mt-0 lg:ml-16">
         <div className="flex-1 flex flex-col bg-negro-50">
-          <SearchResults />
+          <SearchResults open={open} />
           <div className="relative h-[160px] mt-[2rem]">
             <svg
               className="absolute bottom-0 left-0 w-full h-[160px] bg-negro-50"
@@ -24,7 +27,7 @@ const Index = () => {
           </div>
         </div>
 
-        <FilterPanel />
+        <FilterPanel handleCreateNew={() => setOpen(true)} />
       </div>
     </div>
   );
