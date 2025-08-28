@@ -4,17 +4,22 @@ import {
   Dialog,
   DialogContent,
   DialogHeader,
-  DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
 import { useLeccionConCoincidencia } from "../hooks/leccion-con-coincidencia/useLeccionConCoincidencia";
 import LoadingSkeleton from "../ui/loading-skeleton";
 import { useSearchParams } from "react-router-dom";
+import { ModalState } from "../ui/modal-state";
 
-const SearchResults = () => {
+type SearchProps = {
+  open: boolean;
+};
+
+const SearchResults = ({ open }: SearchProps) => {
   const [searchParams] = useSearchParams();
   const [selectedResultId, setSelectedResultId] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalStateOpen, setIsModalStateOpen] = useState(false);
   const { isLoading, resultados, onGetLeccionConCoincidencia } =
     useLeccionConCoincidencia();
 
@@ -36,6 +41,26 @@ const SearchResults = () => {
     selectedResultId !== null
       ? resultados.find((r) => r.Lesson.Id === selectedResultId)
       : null;
+
+  const [newState, setNewState] = useState({
+    name: "",
+  });
+
+  useEffect(() => {
+    setIsModalStateOpen(open);
+  }, [open]);
+
+  const handleCreateState = () => {
+    if (newState.name.trim()) {
+      setNewState({ name: "" });
+      setIsModalStateOpen(false);
+    }
+  };
+
+  const handleCancel = () => {
+    setNewState({ name: "" });
+    setIsModalStateOpen(false);
+  };
 
   return (
     <div className="flex-1 p-4 lg:p-8 bg-negro-50 cloud-bg ">
@@ -107,7 +132,6 @@ const SearchResults = () => {
           </>
         )}
       </div>
-
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
         <DialogContent className="border-blue-200 max-w-2xl max-h-[90vh] overflow-y-auto">
           {selectedResult && (
@@ -224,6 +248,15 @@ const SearchResults = () => {
             </>
           )}
         </DialogContent>
+      </Dialog>
+
+      <Dialog open={isModalStateOpen} onOpenChange={setIsModalStateOpen}>
+        <ModalState
+          newForm={newState}
+          setNewForm={setNewState}
+          handleCancel={handleCancel}
+          handleCreateForm={handleCreateState}
+        />
       </Dialog>
     </div>
   );
