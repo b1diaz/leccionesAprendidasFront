@@ -1,54 +1,56 @@
-# React + TypeScript + Vite
+# Sistema de Lecciones Aprendidas
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Sistema de búsqueda y gestión de lecciones aprendidas con diseño Material Design minimalista.
 
-Currently, two official plugins are available:
+## Requisitos
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Node.js & npm - [instalar con nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
-## Expanding the ESLint configuration
+## Instalación
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+```sh
+# Paso 1: Clonar el repositorio
+git clone <YOUR_GIT_URL>
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+# Paso 2: Navegar al directorio del proyecto
+cd <YOUR_PROJECT_NAME>
+
+# Paso 3: Instalar las dependencias necesarias
+npm i
+
+# Paso 4: Configurar variables de entorno
+# Crea un archivo .env en la raíz del proyecto con tus valores
+
+# Paso 5: Iniciar el servidor de desarrollo
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Configuración de Variables de Entorno
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+El proyecto requiere variables de entorno para conectarse a la API. Crea un archivo `.env` en la raíz del proyecto con las siguientes variables:
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```env
+VITE_API_URL=https://lecciones-aprendidas-func.azurewebsites.net/api
+VITE_API_KEY=tu-codigo-de-api-aqui
+VITE_ENV=qa
+VITE_APP_TITLE=Lecciones Aprendidas
 ```
+
+**Importante:** El archivo `.env` está en `.gitignore` y no se commitea al repositorio.
+
+## Tecnologías utilizadas
+
+Este proyecto está construido con:
+
+- Vite
+- TypeScript
+- React
+- shadcn-ui
+- Tailwind CSS
+
+## Scripts disponibles
+
+- `npm run dev` - Inicia el servidor de desarrollo
+- `npm run build` - Construye la aplicación para producción
+- `npm run preview` - Previsualiza la build de producción
+- `npm run lint` - Ejecuta el linter
